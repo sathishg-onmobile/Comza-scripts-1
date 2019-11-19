@@ -1,0 +1,61 @@
+TRUNCATE TABLE monthly_unqiue_uesrs;
+TRUNCATE TABLE daily_unqiue_uesrs;
+TRUNCATE TABLE daily_advance_sum_2017;
+TRUNCATE TABLE daily_payment_sum_2017;
+TRUNCATE TABLE daily_requests_sum;
+TRUNCATE TABLE Payment_wise_data;
+TRUNCATE TABLE wrong_payment_records;
+TRUNCATE TABLE Server_Health_Cheklist;
+
+LOAD DATA LOCAL INFILE '/home/sathish/Final_data/Final_unique.txt' INTO TABLE monthly_unqiue_uesrs FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n';
+LOAD DATA LOCAL INFILE '/home/sathish/Final_data/Final_daily_unique.txt' INTO TABLE daily_unqiue_uesrs FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n'; 
+LOAD DATA LOCAL INFILE '/home/sathish/Final_data/Final_advance.txt' INTO TABLE daily_advance_sum_2017 FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n' ;
+LOAD DATA LOCAL INFILE '/home/sathish/Final_data/Final_payments.txt' INTO TABLE daily_payment_sum_2017 FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n' ;  LOAD DATA LOCAL INFILE '/home/sathish/Final_data/Final_request.txt' INTO TABLE daily_requests_sum FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n' ;
+LOAD DATA LOCAL INFILE '/home/sathish/Final_data/Final_wrong_payment_records.txt' INTO TABLE wrong_payment_records FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n' ;
+LOAD DATA LOCAL INFILE '/home/sathish/Final_data/Final_checklist.txt' INTO TABLE Server_Health_Cheklist FIELDS TERMINATED BY '\t' LINES TERMINATED BY
+'\n' ;
+
+delete from daily_advance_sum where adv_date like'2018-07%';
+insert into daily_advance_sum select * from daily_advance_sum_2017 where adv_date like '2018-07%';
+delete from daily_payment_sum where  pay_date like'2018-07%' ;
+insert into daily_payment_sum select * from daily_payment_sum_2017 where pay_date like '2018-07%';
+delete from daily_unique_denom where  advance_datetime like'2018-07%';
+insert into daily_unique_denom select * from daily_unique_denom_2017 where advance_datetime like '2018-07%';
+
+#delete from daily_advance_sum where adv_date >(now()- INTERVAL 1 DAY);
+#delete from daily_payment_sum where pay_date >(now()- INTERVAL 1 DAY);
+
+
+TRUNCATE TABLE monthly_unique_denom;
+TRUNCATE TABLE daily_unique_denom_2017;
+
+LOAD DATA LOCAL INFILE '/home/sathish/Final_data/Final_daily_uniq.txt' INTO TABLE daily_unique_denom_2017 FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n';
+LOAD DATA LOCAL INFILE '/home/sathish/Final_data/Final_month_uniq.txt' INTO TABLE monthly_unique_denom FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n';
+
+LOAD DATA LOCAL INFILE '/home/sathish/Final_data/Final_Payment_wise.txt' INTO TABLE Payment_wise_data FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n';
+
+#delete from Payment_wise_data where advance_datetime >(now()- INTERVAL 1 DAY);
+
+#TRUNCATE TABLE  daily_advance_Full;
+#TRUNCATE TABLE  daily_pay_Full;
+
+#insert into daily_advance_Full(adv_date,market_name,advance_amount,adv_amount,service_fee)select adv_date,market_name,advance_amount,advance_amount_sum as adv_amount,commission_amount_sum as service_fee from daily_advance_sum;
+#insert into daily_pay_Full(pay_date,market_name,advance_amount,pay_amount,service_fee)select pay_date,market_name,advance_amount,payment_amount_sum as pay_amount,commission_amount_sum as service_fee from daily_payment_sum;
+
+delete from daily_unique_denom where advance_datetime like'2018-07%';
+insert into daily_unique_denom select * from daily_unique_denom_2017 where advance_datetime like '2018-07%';
+
+#delete from daily_unique_denom where advance_datetime >(now()- INTERVAL 1 DAY);
+
+TRUNCATE TABLE daily_advance_Full_bkp2;
+
+insert into daily_advance_Full_bkp2 select adv_date as date,market_name,advance_amount as denom,advance_amount_sum as amount,'Advance' as type  from daily_advance_sum;
+insert into daily_advance_Full_bkp2 select pay_date as date,market_name,payment_amount as denom,payment_amount_sum as amount,'Payment' as type  from daily_payment_sum;
+insert into daily_advance_Full_bkp2 select pay_date as date,market_name,payment_amount as denom,payment_amount_count as amount,'Payment_count' as type  from daily_payment_sum;
+insert into daily_advance_Full_bkp2 select adv_date as date,market_name,advance_amount as denom,advance_amount_count as amount,'Advance_count' as type  from daily_advance_sum;
+insert into daily_advance_Full_bkp2 select pay_date as date,market_name,commission_amount as denom,commission_amount_sum as amount,'Service_fee_Coll' as type  from daily_payment_sum;
+insert into daily_advance_Full_bkp2 select adv_date as date,market_name,advance_amount as denom,commission_amount_sum as amount,'Service_fee_Given' as type  from  daily_advance_sum;
+insert into daily_advance_Full_bkp2 select advance_datetime as date,market_name,advance_amount as denom,count_msisdn as amount,'Unique_denom_wise' as type  from  daily_unique_denom;
+
+
+

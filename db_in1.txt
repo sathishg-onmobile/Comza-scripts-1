@@ -1,0 +1,22 @@
+TRUNCATE TABLE Server_Health_Cheklist;
+TRUNCATE TABLE hourly_data_trend;
+TRUNCATE TABLE phourly_data_trend;
+LOAD DATA LOCAL INFILE '/home/sathish/Final_data/Final_checklist.txt' INTO TABLE Server_Health_Cheklist FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n' ;
+LOAD DATA LOCAL INFILE '/home/sathish/Final_data/Final_hourly_trend.txt' INTO TABLE hourly_data_trend FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n';
+LOAD DATA LOCAL INFILE '/home/sathish/Final_data/Final_phourly_trend.txt' INTO TABLE phourly_data_trend FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n';
+
+TRUNCATE TABLE hourly_advance_treand;
+#SELECT date_format(((NOW()-interval 1 day) - INTERVAL 1 MONTH),'%Y-%m-%d') into @CURRENT_MONTH;
+#insert into hourly_advance_treand select market_name as market_name,advance_datetime as advance_datetime, hour_datetime as hour_datetime,`count(*)` as counts,'avg_trend' as type from mhourly_data_trend where advance_datetime like @CURRENT_MONTH;
+select date_format((curdate()-interval 1 day),'%Y-%m-%d') into @CURRENT;
+insert into hourly_advance_treand select market_name as market_name,advance_datetime as advance_datetime, hour_datetime as hour_datetime,`count(*)` as counts,'cur_trend' as type from hourly_data_trend where advance_datetime like @CURRENT;
+insert into hourly_advance_treand select market_name as market_name,advance_datetime as advance_datetime, hour_datetime as hour_datetime,avg(`count(*)`) as counts,'avg_trend' as type from mhourly_data_trend group by market_name,hour_datetime;
+
+TRUNCATE TABLE hourly_advance_day_treand;
+TRUNCATE TABLE hourly_payment_day_treand;
+insert into hourly_advance_day_treand select * from hourly_advance_treand where type ='avg_trend';
+insert into hourly_payment_day_treand select market_name as market_name,payment_datetime as payment_datetime, hour_datetime as hour_datetime,avg(`count(*)`) as counts,'avg_trend' as type from mphourly_data_trend group by market_name,hour_datetime;
+select date_format((curdate()-interval 0 day),'%Y-%m-%d') into @CURRENT_DAY;
+insert into hourly_advance_day_treand select market_name as market_name,advance_datetime as advance_datetime, hour_datetime as hour_datetime,`count(*)` as counts,'cur_trend' as type from hourly_data_trend where advance_datetime like @CURRENT_DAY;
+select date_format((curdate()-interval 0 day),'%Y-%m-%d') into @CURRENT_DAY;
+insert into hourly_payment_day_treand select market_name as market_name,payment_datetime as payment_datetime, hour_datetime as hour_datetime,`count(*)` as counts,'cur_trend' as type from phourly_data_trend where payment_datetime like @CURRENT_DAY;

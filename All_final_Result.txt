@@ -1,0 +1,25 @@
+11/19/19:Before_ALL_Market_file 1574151086
+11/19/19:Before_ALL_Market_file_Total_count: 17 
+ALL_OLD_files_removed
+Process_started Tue Nov 19 10:11:26 CAT 2019
+11/19/19 :TIGO_RWANDA Received: 
+11/19/19 :KSA Received: 
+11/19/19 :TELECELZIM Received: 
+11/19/19 :AIRTELTZ Received: 
+11/19/19 :AIRTELBF Received: 
+11/19/19 :AIRTELCGB Received: 
+11/19/19 :AIRTELMW Received: 
+11/19/19 :TATA Received: 
+11/19/19 :MOOVNE Received: 
+11/19/19 :AIRTEL_GB Received: 
+11/19/19 :MCI-IRAN Received: 
+------------------AFTER_ALL_Market_file---------------------------------
+11/19/19 :AFTER_ALL_Market_file_Total_count: 17 
+11/19/19 :Moov_BJ Received: 
+11/19/19 :MOOV TOGO Received: 
+11/19/19 :AIRTEL_RW Received: 
+11/19/19 :AIRTELDRC Received: 
+11/19/19 :OMAN Received: 
+11/19/19 :MALITEL Received: 
+11/19/19 :VPN4 AND VPN 5 Final_data_Received: 
+0 minutes and 4 seconds elapsed for Script Execution. 1574151090

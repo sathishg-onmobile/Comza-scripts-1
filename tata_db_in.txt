@@ -1,0 +1,14 @@
+TRUNCATE TABLE tata_new_report;
+TRUNCATE TABLE tata_new_report_payment;
+
+LOAD DATA LOCAL INFILE '/home/sathish/tata/advance.txt' INTO TABLE tata_new_report FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n';
+LOAD DATA LOCAL INFILE '/home/sathish/tata/payments3.txt' INTO TABLE tata_new_report_payment FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n';
+
+#TRUNCATE TABLE daily_TATA_Report;
+
+insert into daily_TATA_Report select advance_datetime as date,market_name,circle_id,advance_amount as denom ,sum_advance_amount as amount ,'Advance_SUM' as type from tata_new_report;
+insert into daily_TATA_Report select advance_datetime as date,market_name,circle_id,advance_amount as denom ,count_advance_amount as amount ,'Advance_Count' as type from tata_new_report;
+insert into daily_TATA_Report select payment_datetime as date,market_name,circle_id,advance_amount as denom ,sum_payment_amount as amount ,'Payment_SUM' as type from tata_new_report_payment; 
+insert into daily_TATA_Report select payment_datetime as date,market_name,circle_id,advance_amount as denom ,count_payment_amount as amount ,'Payment_COUNT' as type from tata_new_report_payment;
+
+

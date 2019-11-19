@@ -1,0 +1,5 @@
+TRUNCATE TABLE mhourly_data_trend;
+TRUNCATE TABLE mphourly_data_trend;
+LOAD DATA LOCAL INFILE '/home/sathish/Final_data/Final_mhourly_trend.txt' INTO TABLE mhourly_data_trend FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n';
+LOAD DATA LOCAL INFILE '/home/sathish/Final_data/Final_mphourly_trend.txt' INTO TABLE mphourly_data_trend FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n';
+

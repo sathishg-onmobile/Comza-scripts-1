@@ -1,0 +1,40 @@
+TRUNCATE TABLE Actual_outstanding;
+TRUNCATE TABLE Total_Principal_Paid;
+TRUNCATE TABLE Total_Principal_borrowed;
+
+
+LOAD DATA LOCAL INFILE '/home/sathish/Bad_Final_data/Final_Actual_outstanding.txt' INTO TABLE Actual_outstanding FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n';
+LOAD DATA LOCAL INFILE '/home/sathish/Bad_Final_data/Final_Total_Principal_borrowed.txt' INTO TABLE Total_Principal_borrowed FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n';
+LOAD DATA LOCAL INFILE '/home/sathish/Bad_Final_data/Final_Total_Principal_Paid.txt' INTO TABLE Total_Principal_Paid FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n';
+
+TRUNCATE TABLE bad_debt_report;
+insert into bad_debt_report(loan_month,paid_month,market_name,denom,amount,type) select loan_month as loan_month, paid_in_month as paid_month,market_name,advance_amount as denom,paid_amount as amount,'Payment_Sum' as type from Total_Principal_Paid;
+insert into bad_debt_report(loan_month,market_name,denom,amount,type) select dates as loan_month,market_name as market_name,advance_amount as denom,outstanding_principal as amount,'outstanding_Pri' as type from Actual_outstanding;
+insert into bad_debt_report(loan_month,market_name,denom,amount,type) select dates as loan_date,market_name as market_name,advance_amount as denom,sum_advance_amount as amount,'Advance_Sum' as type from Total_Principal_borrowed;
+delete from bad_debt_report where amount =0;
+
+
+drop table airtel_pay1;
+drop table airtel_adv1;
+drop table airtel_out1;
+drop table airtel_pay2;
+drop table airtel_adv2;
+drop table airtel_out2;
+drop table airtel_bad_report;
+
+create table airtel_pay1 as select * from bad_debt_report where type='Payment_Sum' and market_name like 'airtel%';
+create table airtel_adv1 as select * from bad_debt_report where type='Advance_Sum' and market_name like 'airtel%';
+create table airtel_out1 as select * from bad_debt_report where type='outstanding' and market_name like 'airtel%';
+
+create table airtel_pay2 as select a.loan_month,a.paid_month,a.market_name,a.denom,a.amount,b.Forex,round(a.amount/b.Forex)as famount,(a.denom/b.Forex) as fdenom,left(b.Start_date,7) as pay_date, 'payments'as type from airtel_pay1 a,monthly_Forex_data b where a.market_name=b.market_name and left(b.Start_date,7)=a.paid_month;
+
+create table airtel_adv2 as select a.loan_month,a.paid_month,a.market_name,a.denom,a.amount,b.Forex,round(a.amount/b.Forex)as famount,(a.denom/b.Forex) as fdenom,left(b.Start_date,7) as adv_date, 'advnace' as type from airtel_adv1 a,monthly_Forex_data b where a.market_name=b.market_name and left(b.Start_date,7)=a.loan_month;
+
+create table airtel_out2 as select a.loan_month,a.paid_month,a.market_name,a.denom,a.amount,b.Forex,round(a.amount/b.Forex)as famount,(a.denom/b.Forex) as fdenom,left(b.Start_date,7) as adv_date, 'outstanding' as type from airtel_out1 a,monthly_Forex_data b where a.market_name=b.market_name and left(b.Start_date,7)=a.loan_month;
+
+create table airtel_bad_report as select * from airtel_adv2;
+
+insert into airtel_bad_report select * from airtel_pay2;
+
+
+insert into airtel_bad_report select * from airtel_out2;

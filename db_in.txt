@@ -1,0 +1,146 @@
+TRUNCATE TABLE monthly_unqiue_uesrs_bkp;
+TRUNCATE TABLE daily_unqiue_uesrs;
+TRUNCATE TABLE daily_advance_sum_2017;
+TRUNCATE TABLE daily_payment_sum_2017;
+TRUNCATE TABLE daily_requests_sum_bkp;
+TRUNCATE TABLE Payment_wise_data_bkp;
+TRUNCATE TABLE wrong_payment_records;
+#TRUNCATE TABLE Server_Health_Cheklist;
+TRUNCATE TABLE monthly_unique_denom_bkp;
+TRUNCATE TABLE daily_unique_denom_2017;
+TRUNCATE TABLE 7days_payments;
+#TRUNCATE TABLE megapromo;
+#TRUNCATE TABLE promo_offer_transaction;
+#TRUNCATE TABLE hourly_data_trend;
+TRUNCATE TABLE same_day_pay;
+TRUNCATE TABLE 1_day_pay;
+TRUNCATE TABLE mhourly_data_trend;
+TRUNCATE TABLE mphourly_data_trend;
+TRUNCATE TABLE nots_sub_loan_data;
+TRUNCATE TABLE nots_Payment;
+TRUNCATE TABLE nots_bi_data;
+
+##############################################################
+#LOAD DATA LOCAL INFILE '/home/sathish/megapromo/megapromo.txt' INTO TABLE megapromo FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n';
+#LOAD DATA LOCAL INFILE '/home/sathish/megapromo/megapromo_offer.txt' INTO TABLE promo_offer_transaction FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n';
+#TRUNCATE TABLE megapromo_mapped;
+#insert into megapromo_mapped select transaction_id,transaction_day,transaction_datetime,msisdn,request_id,transaction_entries_count,'Airtel_Rwanda_72' as type,'1746666' as totalcosts from megapromo where msisdn like '72%';
+#insert into megapromo_mapped select transaction_id,transaction_day,transaction_datetime,msisdn,request_id,transaction_entries_count,'Airtel_Rwanda_73' as type,'1746666' as totalcosts from megapromo where msisdn like '73%';
+#################################################################
+
+LOAD DATA LOCAL INFILE '/home/sathish/Final_data/Final_unique.txt' INTO TABLE monthly_unqiue_uesrs_bkp FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n';
+LOAD DATA LOCAL INFILE '/home/sathish/Final_data/Final_daily_unique.txt' INTO TABLE daily_unqiue_uesrs FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n';
+LOAD DATA LOCAL INFILE '/home/sathish/Final_data/Final_advance.txt' INTO TABLE daily_advance_sum_2017 FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n' ;
+LOAD DATA LOCAL INFILE '/home/sathish/Final_data/Final_payments.txt' INTO TABLE daily_payment_sum_2017 FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n' ;  
+LOAD DATA LOCAL INFILE '/home/sathish/Final_data/Final_request.txt' INTO TABLE daily_requests_sum_bkp FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n' ;
+LOAD DATA LOCAL INFILE '/home/sathish/Final_data/Final_wrong_payment_records.txt' INTO TABLE wrong_payment_records FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n' ;
+#LOAD DATA LOCAL INFILE '/home/sathish/Final_data/Final_checklist.txt' INTO TABLE Server_Health_Cheklist FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n' ;
+LOAD DATA LOCAL INFILE '/home/sathish/Final_data/Final_daily_uniq.txt' INTO TABLE daily_unique_denom_2017 FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n';
+LOAD DATA LOCAL INFILE '/home/sathish/Final_data/Final_month_uniq.txt' INTO TABLE monthly_unique_denom_bkp FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n';
+LOAD DATA LOCAL INFILE '/home/sathish/Final_data/Final_Payment_wise.txt' INTO TABLE Payment_wise_data_bkp FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n';
+LOAD DATA LOCAL INFILE '/home/sathish/Final_data/Final_7day_Payment.txt' INTO TABLE 7days_payments FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n';
+#LOAD DATA LOCAL INFILE '/home/sathish/Final_data/Final_hourly_trend.txt' INTO TABLE hourly_data_trend FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n';
+LOAD DATA LOCAL INFILE '/home/sathish/Final_data/Final_same_day_Pay.txt' INTO TABLE same_day_pay FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n';
+LOAD DATA LOCAL INFILE '/home/sathish/Final_data/Final_1day_Payment.txt' INTO TABLE 1_day_pay FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n';
+LOAD DATA LOCAL INFILE '/home/sathish/tigorw/nots_sub_loan_data.csv' INTO TABLE nots_sub_loan_data fields terminated by '|'  LINES TERMINATED BY '\n';
+LOAD DATA LOCAL INFILE '/home/sathish/tigorw/Payment.csv' INTO TABLE nots_Payment FIELDS TERMINATED BY ','  OPTIONALLY ENCLOSED BY '"' IGNORE 1 LINES;
+#LOAD DATA LOCAL INFILE '/home/sathish/tigorw/Payment.csv' INTO TABLE nots_Payment FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' IGNORE 1 LINES;
+LOAD DATA LOCAL INFILE '/home/sathish/Final_data/Final_mhourly_trend.txt' INTO TABLE mhourly_data_trend FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n';
+LOAD DATA LOCAL INFILE '/home/sathish/Final_data/Final_mphourly_trend.txt' INTO TABLE mphourly_data_trend FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n';
+delete from daily_advance_sum where adv_date like'2019-11%';
+insert into daily_advance_sum select * from daily_advance_sum_2017 where adv_date like '2019-11%';
+delete from daily_payment_sum where  pay_date like'2019-11%' ;
+insert into daily_payment_sum select * from daily_payment_sum_2017 where pay_date like '2019-11%';
+delete from daily_unique_denom where  advance_datetime like'2019-11%';
+insert into daily_unique_denom select * from daily_unique_denom_2017 where advance_datetime like '2019-11%';
+delete from daily_requests_sum where Date like'2019-11%';
+insert into daily_requests_sum select * from daily_requests_sum_bkp where Date like '2019-11%';
+delete from monthly_unqiue_uesrs where month like'2019-11%';
+insert into monthly_unqiue_uesrs select * from monthly_unqiue_uesrs_bkp where month like '2019-11%';
+delete from Payment_wise_data where advance_datetime like'2019-11%';
+insert into Payment_wise_data select * from Payment_wise_data_bkp where advance_datetime like '2019-11%';
+delete from monthly_unique_denom where month_adv_date like'2019-11%';
+insert into monthly_unique_denom select * from monthly_unique_denom_bkp where month_adv_date like '2019-11%';
+
+insert into nots_bi_data select date(interest_expressed_datetime) as date,count(msisdn) as amount,'interest_count' as type from nots_sub_loan_data where interest_expressed_datetime IS NOT NULL group by date ;  
+insert into nots_bi_data select date(loan_datetime) as date,sum(loan_amount)as amount,'loans_sum' as type from nots_sub_loan_data where loan_datetime IS NOT NULL and Payment_status!='100 RWF is yet to be paid' and Status!='100 YET TO BE PAID' group by date;
+insert into nots_bi_data select date(loan_datetime) as date,count(msisdn)as amount,'loans_count' as type from nots_sub_loan_data where loan_datetime IS NOT NULL and Payment_status!='100 RWF is yet to be paid' and Status!='100 YET TO BE PAID' group by date;	
+insert into nots_bi_data select date(PaymentDate)as date,count(MSISDN) as amount,'Payments_count' as type from nots_Payment group by date;
+insert into nots_bi_data select date(PaymentDate)as date,sum(PaymentAmount) as amount,'Payments_sum' as type from nots_Payment group by date;
+delete from nots_bi_data where date=CURDATE();
+
+
+#delete from daily_advance_sum where adv_date >(now()- INTERVAL 1 DAY);
+#delete from daily_payment_sum where pay_date >(now()- INTERVAL 1 DAY);
+#delete from Payment_wise_data where advance_datetime >(now()- INTERVAL 1 DAY);
+#delete from daily_unique_denom where advance_datetime >(now()- INTERVAL 1 DAY);
+
+#TRUNCATE TABLE  daily_advance_Full;
+#TRUNCATE TABLE  daily_pay_Full;
+
+#insert into daily_advance_Full(adv_date,market_name,advance_amount,adv_amount,service_fee)select adv_date,market_name,advance_amount,advance_amount_sum as adv_amount,commission_amount_sum as service_fee from daily_advance_sum;
+#insert into daily_pay_Full(pay_date,market_name,advance_amount,pay_amount,service_fee)select pay_date,market_name,advance_amount,payment_amount_sum as pay_amount,commission_amount_sum as service_fee from daily_payment_sum;
+
+
+TRUNCATE TABLE daily_advance_Full_bkp2;
+
+insert into daily_advance_Full_bkp2 select adv_date as date,market_name,advance_amount as denom,advance_amount_sum as amount,'Advance' as type  from daily_advance_sum;
+insert into daily_advance_Full_bkp2 select pay_date as date,market_name,payment_amount as denom,payment_amount_sum as amount,'Payment' as type  from daily_payment_sum;
+insert into daily_advance_Full_bkp2 select pay_date as date,market_name,payment_amount as denom,payment_amount_count as amount,'Payment_count' as type  from daily_payment_sum;
+insert into daily_advance_Full_bkp2 select adv_date as date,market_name,advance_amount as denom,advance_amount_count as amount,'Advance_count' as type  from daily_advance_sum;
+insert into daily_advance_Full_bkp2 select pay_date as date,market_name,commission_amount as denom,commission_amount_sum as amount,'Service_fee_Coll' as type  from daily_payment_sum;
+insert into daily_advance_Full_bkp2 select adv_date as date,market_name,advance_amount as denom,commission_amount_sum as amount,'Service_fee_Given' as type  from  daily_advance_sum;
+insert into daily_advance_Full_bkp2 select advance_datetime as date,market_name,advance_amount as denom,count_msisdn as amount,'Unique_denom_wise' as type  from  daily_unique_denom;
+
+delete from daily_advance_Full_bkp2 where date like '2017%';
+insert into daily_advance_Full_bkp2 select * from daily_advance_Full_bkp2_2017_2018 where date like '2017%';
+delete from daily_advance_Full_bkp2 where date  between '2018-01-01' and '2018-08-31';
+insert into daily_advance_Full_bkp2 select * from daily_advance_Full_bkp2_2017_2018 where date between '2018-01-01' and '2018-08-31';
+
+
+#TRUNCATE TABLE subscriber_advance;
+
+#select DATE_FORMAT(LAST_DAY(now()),'%Y-%m-%d 23:59:59') into @LAST_DAY;
+#select date_format((curdate()- interval 7 day),'%Y-%m-%d 00:00:00') into @FIRST_DAY;
+#select date_format((last_day(curdate() - interval 1 month) + interval 1 day),'%Y-%m-%d 00:00:00') into @FIRST_DAY;
+
+
+#insert into subscriber_advance  select market_name,adv_date as advance_datetime,sum(advance_amount_count) as advance_count,sum(advance_amount_sum)as advance_sum from daily_advance_sum where adv_date between @FIRST_DAY and @LAST_DAY and market_name<>'tigorw'  group by market_name,date(adv_date);
+
+#insert into subscriber_advance select market_name as market_name,adv_date as advance_datetime,sum(advance_amount_count) as advance_count,sum(advance_amount_sum)as advance_sum from daily_advance_sum where adv_date between @FIRST_DAY and @LAST_DAY and market_name='tigorw' and advance_amount in('20','84','100','135','150','200','300') group by date(adv_date),market_name;
+
+#TRUNCATE TABLE paymnet_based_report;
+#select DATE_FORMAT(LAST_DAY(now()),'%Y-%m-%d 23:59:59') into @LAST_DAY;
+#select date_format((last_day(curdate() - interval 2 month) + interval 1 day),'%Y-%m-%d 00:00:00') into @FIRST_DAY;
+#select date_format((curdate()- interval 7 day),'%Y-%m-%d 00:00:00') into @FIRST_DAY;
+#select date_format((last_day(curdate() - interval 1 month) + interval 1 day),'%Y-%m-%d 00:00:00') into @FIRST_DAY;
+
+#insert into paymnet_based_report select a.market_name,a.advance_datetime,a.advance_count,a.advance_sum,b.count as same_day_count,b.payment_sum as same_day_payment_sum,c.count as after24hr_count,c.payment_sum as after24hr_payment_sum,d.count as 7days_count,d.payment_sum as 7days_payment_sum,d.advance_sum as 7days_payment from subscriber_advance a,same_day_pay b,1_day_pay c,7days_payments d where a.market_name=b.market_name and c.market_name=a.market_name and d.market_name =a.market_name and a.advance_datetime=b.advance_datetime and c.advance_datetime=a.advance_datetime and d.advance_datetime=a.advance_datetime and  a.advance_datetime between @FIRST_DAY and @LAST_DAY group by a.market_name,a.advance_datetime;
+
+#drop table final_paymnet_based_report;
+
+#create table final_paymnet_based_report as select market_name,advance_datetime,advance_count,advance_sum,same_day_count,same_day_payment_sum,concat(round((same_day_count/advance_count*100),2),'%') as same_day_count_per,concat(round((same_day_payment_sum/advance_sum*100),2),'%') as same_day_sum_per,after24hr_count,after24hr_payment_sum,concat(round((after24hr_count/advance_count*100),2),'%') as after24hr_count_per,concat(round((after24hr_payment_sum/advance_sum*100),2),'%') as after24hr_sum_per,7days_count,7days_payment_sum,concat(round((7days_count/advance_count*100),2),'%') as 7days_count_per,concat(round((7days_payment_sum/advance_sum*100),2),'%') as 7days_sum_per,concat(round((7days_payment/advance_sum*100),2),'%') as 7days_payment from paymnet_based_report;
+
+TRUNCATE TABLE request_report_today;
+TRUNCATE TABLE request_report_sum;
+TRUNCATE TABLE final_request_report_today;
+
+
+SELECT date_format(((NOW()-interval 1 day) - INTERVAL 1 MONTH),'%Y-%m-%d') into @CURRENT_MONTH;
+insert into request_report_today select * from daily_requests_sum where date like @CURRENT_MONTH;
+select date_format((curdate()-interval 1 day),'%Y-%m-%d') into @CURRENT;
+insert into request_report_today select * from daily_requests_sum where date like @CURRENT;
+
+select DATE_FORMAT(LAST_DAY(now()),'%Y-%m-%d') into @LAST_DAY;
+select date_format((last_day(curdate() - interval 1 month) + interval 1 day),'%Y-%m-%d') into @FIRST_DAY;
+insert into request_report_sum select market_name,sum(count)as sum_value,date from daily_requests_sum where date between @FIRST_DAY and @LAST_DAY group by market_name ,date;
+
+select date_format(last_day(curdate()-interval 1 month),'%Y-%m-%d') into @LAST_MONTH;
+select date_format((last_day(curdate() - interval 2 month) + interval 1 day),'%Y-%m-%d') into @FIRST_MONTH;
+
+insert into request_report_sum select market_name,sum(count)as sum_value,date from daily_requests_sum where date between @FIRST_MONTH and @LAST_MONTH group by market_name ,date;
+
+insert into final_request_report_today select a.market_name,a.eligibility_status_desc,a.Date,a.Count,b.sum_value,concat(round(((a.Count)/(b.sum_value) *100),2),'%') as persentage from request_report_today a,request_report_sum b where a.market_name=b.market_name and a.Date=b.date and a.Date like @CURRENT group by a.market_name,a.eligibility_status_desc;
+
+insert into final_request_report_today select a.market_name,a.eligibility_status_desc,a.Date,a.Count,b.sum_value,concat(round(((a.Count)/(b.sum_value) *100),2),'%') as persentage from request_report_today a,request_report_sum b where a.market_name=b.market_name and a.Date=b.date and a.Date like @CURRENT_MONTH group by a.market_name,a.eligibility_status_desc;
+

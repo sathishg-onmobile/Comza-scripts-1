@@ -1,0 +1,14 @@
+ALL_Market_file
+11/19/19 :TIGO_RWANDA Total_count: 16 
+11/19/19 :Virgin_KSA Total_count: 20 
+11/19/19 :Telecel_ZIM Total_count: 20 
+11/19/19 :AIRTEL_TZ Total_count: 27 
+11/19/19 :AIRTEL_BF Total_count: 20 
+11/19/19 :AIRTEL_CGB Total_count: 27 
+11/19/19 :AIRTEL_MW Total_count: 27 
+11/19/19 :TATA_IND Total_count: 13 
+11/19/19 :MOOV_NE Total_count: 20 
+11/19/19 :AIRTEL_GB Total_count: 27 
+All_file_received
+11/19/19 :MCI_Iran Total_count: 20 
+All_file_received

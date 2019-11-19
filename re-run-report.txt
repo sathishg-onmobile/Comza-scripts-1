@@ -1,0 +1,15 @@
+delete from daily_advance_sum where adv_date like'2018-09%' and  market_name='airtelcg';
+insert into daily_advance_sum select * from daily_advance_sum_2017 where adv_date like '2018-09%' and market_name='airtelcg';
+delete from daily_payment_sum where  pay_date like'2018-09%' and  market_name='airtelcg' ;
+insert into daily_payment_sum select * from daily_payment_sum_2017 where pay_date like '2018-09%' and market_name='airtelcg';
+delete from daily_unique_denom where  advance_datetime like'2018-09%' and  market_name='airtelcg';
+insert into daily_unique_denom select * from daily_unique_denom_2017 where advance_datetime like '2018-09%' and  market_name='airtelcg';
+delete from daily_requests_sum where Date like'2018-09%' and  market_name='airtelcg';
+insert into daily_requests_sum select * from daily_requests_sum_bkp where Date like '2018-09%' and  market_name='airtelcg';
+delete from monthly_unqiue_uesrs where month like'2018-09%' and  market_name='airtelcg';
+insert into monthly_unqiue_uesrs select * from monthly_unqiue_uesrs_bkp where month like '2018-09%' and  market_name='airtelcg';
+delete from Payment_wise_data where advance_datetime like'2018-09%' and  market_name='airtelcg';
+insert into Payment_wise_data select * from Payment_wise_data_bkp where advance_datetime like '2018-09%' and  market_name='airtelcg';
+delete from monthly_unique_denom where month_adv_date like'2018-09%' and  market_name='airtelcg';
+insert into monthly_unique_denom select * from monthly_unique_denom_bkp where month_adv_date like '2018-09%' and  market_name='airtelcg';
+
