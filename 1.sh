@@ -1,0 +1,1 @@
+select DATE(advance_datetime) as dates, count(distinct(msisdn)) as Counts from subscriber_advance where advance_datetime between '2019-04-04 00:00:00' and '2019-04-04 23:59:59' and msisdn not in (select msisdn from subscriber_advance where advance_datetime < '2019-04-04 00:00:00');
