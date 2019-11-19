@@ -1,0 +1,32 @@
+git --version
+ 1006  git config --global user.name "sathishg-onmobile"
+ 1007  git config --global user.email "sathishg.onmobile@gmail.com"
+ 1008  git config --list
+ 1009  find .gitconfig
+ 1010  ll
+ 1011  ls -la
+ 1012  ls .gitconfig
+ 1013  git --version
+ 1014  mkdir comza-repo
+ 1015  cd comza-repo/
+ 1016  git init
+ 1017  cp /home/sathish/*.sh .
+ 1018  ll
+ 1019  git add *.sh
+ 1020  git status
+ 1021  git commit -m "first commit"
+ 1022  ls
+ 1023  git remote add origin "https://github.com/sathishg-onmobile/Comza-scripts-1.git"
+ 1024  git pull origin master
+ 1025  git push origin master
+ 1026  ls
+ 1027  git push origin master
+ 1028  git config -l | grep url
+ 1029  git remote set-url origin "https://github-sathishg-onmobile@github.com/sathishg-onmobile/github-repository-name.git"
+ 1030  git config -l | grep url
+ 1031  git remote set-url origin "https://sathishg-onmobile@github.com/sathishg-onmobile/github-repository-name.git"
+ 1032  git config -l | grep url
+ 1033  git push origin master
+ 1034  git remote set-url origin "https://sathishg-onmobile@github.com/sathishg-onmobile/Comza-scripts-1.git"
+ 1035  git push origin master
+
