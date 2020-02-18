@@ -77,6 +77,8 @@ cat Final_Total_Principal_Paid.txt >>/home/sathish/Bad_Final_data/Final_Total_Pr
 echo "`date +%D` :VPN4 AND VPN 5 Final_data_Received: " >>/home/sathish/All_final_Result.txt
 
 mysql -u reports -preports dailyreports -e "source /home/sathish/Bad_db.txt"
+
+mysql -u reports -preports dailyreports -e "source /home/sathish/management_report.sh"
 ##END###
 
 exit 0

@@ -48,10 +48,10 @@ echo "TelecelZiw_data_received $(date)" >>/home/sathish/reportmsg.txt
 sshpass -p "acs@123comza" scp -P 2022 -r sathish@airteltz-db1b:/home/sathish/airteltz/ /home/sathish/
 echo "AirtelTZ_data_received $(date)" >>/home/sathish/reportmsg.txt
 ##AirtelBF###
-sshpass -p "acs/t4t4/" scp -P 922 -r sathish@airtelbf-1a:/home/sathish/airtelbf/ /home/sathish/
-echo "AirtelBF_data_received $(date)" >>/home/sathish/reportmsg.txt
+#sshpass -p "acs/t4t4/" scp -P 922 -r sathish@airtelbf-1b:/home/sathish/airtelbf/ /home/sathish/
+#echo "AirtelBF_data_received $(date)" >>/home/sathish/reportmsg.txt
 ##AirtelCGB###
-sshpass -p "acs/t4t4/" scp -P 922 -r sathish@airtelcg-db1a:/home/sathish/airtelcg/ /home/sathish/
+sshpass -p "acs@123comza" scp -P 922 -r sathish@airtelcg-db1b:/home/sathish/airtelcg/ /home/sathish/
 echo "AirtelCGB_data_received $(date)" >>/home/sathish/reportmsg.txt
 ##TATA_IND###
 sshpass -p "acs/t4t4/" scp -P 2022 -r sathish@tatain-db1b:/home/sathish/tata/ /home/sathish/
@@ -63,7 +63,7 @@ echo "AIRTELMW_data_received $(date)" >>/home/sathish/reportmsg.txt
 sshpass -p "acs@123comza" scp -r sathish@moovne-1a:/home/sathish/moovne/ /home/sathish/
 echo "MOOVNE_data_received $(date)" >>/home/sathish/reportmsg.txt
 ##AirtelGB###
-sshpass -p "acs@123comza" scp -P 9001 -r sathish@airtelga-1a:/home/sathish/airtelgb/ /home/sathish/
+sshpass -p "acs/t4t4/" scp -P 9001 -r sathish@airtelga-1b:/home/sathish/airtelgb/ /home/sathish/
 echo "AirtelGB_data_received $(date)" >>/home/sathish/reportmsg.txt
 
 elif [ `date +%H%M` = "0930" ];then
@@ -82,14 +82,14 @@ echo "TelecelZiw_data_received $(date)" >>/home/sathish/reportmsg.txt
 sshpass -p "acs@123comza" scp -P 2022 -r sathish@airteltz-db1b:/home/sathish/airteltz/ /home/sathish/
 echo "AirtelTZ_data_received $(date)" >>/home/sathish/reportmsg.txt
 ##AirtelBF###
-sshpass -p "acs/t4t4/" scp -P 922 -r sathish@airtelbf-1a:/home/sathish/airtelbf/ /home/sathish/
-echo "AirtelBF_data_received $(date)" >>/home/sathish/reportmsg.txt
+#sshpass -p "acs/t4t4/" scp -P 922 -r sathish@airtelbf-1b:/home/sathish/airtelbf/ /home/sathish/
+#echo "AirtelBF_data_received $(date)" >>/home/sathish/reportmsg.txt
 ##AirtelCGB###
-sshpass -p "acs/t4t4/" scp -P 922 -r sathish@airtelcg-db1a:/home/sathish/airtelcg/ /home/sathish/
+sshpass -p "acs@123comza" scp -P 922 -r sathish@airtelcg-db1b:/home/sathish/airtelcg/ /home/sathish/
 echo "AirtelCGB_data_received $(date)" >>/home/sathish/reportmsg.txt
 ##TATA_IND###
-sshpass -p "acs/t4t4/" scp -P 2022 -r sathish@tatain-db1b:/home/sathish/tata/ /home/sathish/
-echo "TATA_IND_data_received $(date)" >>/home/sathish/reportmsg.txt
+#sshpass -p "acs/t4t4/" scp -P 2022 -r sathish@tatain-db1b:/home/sathish/tata/ /home/sathish/
+#echo "TATA_IND_data_received $(date)" >>/home/sathish/reportmsg.txt
 ##AIRTELMW###
 sshpass -p "acs@123comza" scp -P 20022 -r sathish@airtelmw-db1a:/home/sathish/airtelmw/ /home/sathish/
 echo "AIRTELMW_data_received $(date)" >>/home/sathish/reportmsg.txt
@@ -97,7 +97,7 @@ echo "AIRTELMW_data_received $(date)" >>/home/sathish/reportmsg.txt
 sshpass -p "acs@123comza" scp -r sathish@moovne-1a:/home/sathish/moovne/ /home/sathish/
 echo "MOOVNE_data_received $(date)" >>/home/sathish/reportmsg.txt
 ##AirtelGB###
-sshpass -p "acs@123comza" scp -P 9001 -r sathish@airtelga-1a:/home/sathish/airtelgb/ /home/sathish/
+sshpass -p "acs/t4t4/" scp -P 9001 -r sathish@airtelga-1b:/home/sathish/airtelgb/ /home/sathish/
 echo "AirtelGB_data_received $(date)" >>/home/sathish/reportmsg.txt
 
 else 
@@ -114,10 +114,10 @@ echo "TelecelZiw_data_received $(date)" >>/home/sathish/reportmsg.txt
 sshpass -p "acs@123comza" scp -P 2022 -r -o ConnectTimeout=30 sathish@airteltz-db1b:/home/sathish/airteltz/*hourly_trend.txt /home/sathish/airteltz/
 echo "AirtelTZ_data_received $(date)" >>/home/sathish/reportmsg.txt
 ##AirtelBF###
-sshpass -p "acs/t4t4/" scp -P 922 -r -o ConnectTimeout=30 sathish@airtelbf-1a:/home/sathish/airtelbf/*hourly_trend.txt /home/sathish/airtelbf/
-echo "AirtelBF_data_received $(date)" >>/home/sathish/reportmsg.txt
+#sshpass -p "acs/t4t4/" scp -P 922 -r -o ConnectTimeout=30 sathish@airtelbf-1b:/home/sathish/airtelbf/*hourly_trend.txt /home/sathish/airtelbf/
+#echo "AirtelBF_data_received $(date)" >>/home/sathish/reportmsg.txt
 ##AirtelCGB###
-sshpass -p "acs/t4t4/" scp -P 922 -r -o ConnectTimeout=30 sathish@airtelcg-db1a:/home/sathish/airtelcg/*hourly_trend.txt /home/sathish/airtelcg/
+sshpass -p "acs@123comza" scp -P 922 -r -o ConnectTimeout=30 sathish@airtelcg-db1b:/home/sathish/airtelcg/*hourly_trend.txt /home/sathish/airtelcg/
 echo "AirtelCGB_data_received $(date)" >>/home/sathish/reportmsg.txt
 ##AIRTELMW###
 sshpass -p "acs@123comza" scp -P 20022 -r -o ConnectTimeout=30 sathish@airtelmw-db1a:/home/sathish/airtelmw/*hourly_trend.txt /home/sathish/airtelmw/
@@ -126,7 +126,7 @@ echo "AIRTELMW_data_received $(date)" >>/home/sathish/reportmsg.txt
 sshpass -p "acs@123comza" scp -r -o ConnectTimeout=30 sathish@moovne-1a:/home/sathish/moovne/*hourly_trend.txt /home/sathish/moovne/
 echo "MOOVNE_data_received $(date)" >>/home/sathish/reportmsg.txt
 ##AirtelGB###
-sshpass -p "acs@123comza" scp -P 9001 -r  -o ConnectTimeout=30 sathish@airtelga-1a:/home/sathish/airtelgb/*hourly_trend.txt /home/sathish/airtelgb/
+sshpass -p "acs/t4t4/" scp -P 9001 -r  -o ConnectTimeout=30 sathish@airtelga-1b:/home/sathish/airtelgb/*hourly_trend.txt /home/sathish/airtelgb/
 echo "AirtelGB_data_received $(date)" >>/home/sathish/reportmsg.txt
 
 fi
@@ -198,10 +198,10 @@ echo "TelecelZiw_data_received $(date)" >>/home/sathish/reportmsg.txt
 sshpass -p "acs@123comza" scp -P 2022 -r sathish@airteltz-db1b:/home/sathish/outstading/*.txt /home/sathish/outstading/airteltz-db1a/
 echo "AirtelTZ_data_received $(date)" >>/home/sathish/reportmsg.txt
 ##AirtelBF###
-sshpass -p "acs/t4t4/" scp -P 922 -r sathish@airtelbf-1a:/home/sathish/outstading/*.txt /home/sathish/outstading/airtelbf-1a/
-echo "AirtelBF_data_received $(date)" >>/home/sathish/reportmsg.txt
+#sshpass -p "acs/t4t4/" scp -P 922 -r sathish@airtelbf-1b:/home/sathish/outstading/*.txt /home/sathish/outstading/airtelbf-1a/
+#echo "AirtelBF_data_received $(date)" >>/home/sathish/reportmsg.txt
 ##AirtelCGB###
-sshpass -p "acs/t4t4/" scp -P 922 -r sathish@airtelcg-db1a:/home/sathish/outstading/*.txt /home/sathish/outstading/airtelcg-db1a/
+sshpass -p "acs@123comza" scp -P 922 -r sathish@airtelcg-db1b:/home/sathish/outstading/*.txt /home/sathish/outstading/airtelcg-db1a/
 echo "AirtelCGB_data_received $(date)" >>/home/sathish/reportmsg.txt
 ##TATA_IND###
 sshpass -p "acs/t4t4/" scp -P 2022 -r sathish@tatain-db1b:/home/sathish/outstading/*.txt /home/sathish/outstading/tatain-db1a/
@@ -213,7 +213,7 @@ echo "AIRTELMW_data_received $(date)" >>/home/sathish/reportmsg.txt
 sshpass -p "acs@123comza" scp -r sathish@moovne-1a:/home/sathish/outstading/*.txt /home/sathish/outstading/moovne-1a/
 echo "MOOVNE_data_received $(date)" >>/home/sathish/reportmsg.txt
 ##AirtelGB###
-sshpass -p "acs@123comza" scp -P 9001 -r sathish@airtelga-1a:/home/sathish/outstading/*.txt /home/sathish/outstading/airtelga-1a/
+sshpass -p "acs/t4t4/" scp -P 9001 -r sathish@airtelga-1b:/home/sathish/outstading/*.txt /home/sathish/outstading/airtelga-1a/
 echo "AirtelGB_data_received $(date)" >>/home/sathish/reportmsg.txt
 #MCI_IRAN###
 #sshpass -p "Comza@123Acs" scp -P 6024 -r sathish@mciiran-db1a:/home/sathish/outstading/*.txt /home/sathish/outstading/mciiran-db1a/
